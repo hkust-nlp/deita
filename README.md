@@ -38,9 +38,9 @@ For more details, please refer to our paper: [What Makes Good Data for Alignment
 
 ## :rocket: Deita-Family
 
-## Deita Dataset
+### Deita Dataset
 
-## Deita Models
+### Deita Models
 
 ## TODO
 
