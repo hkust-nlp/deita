@@ -22,8 +22,8 @@ For more details, please refer to our paper: [What Makes Good Data for Alignment
   - [Data Scorer](#data-scorer)
   - [Pipelines](#pipelines)
 - [:rocket: Deita-Family](#rocket-deita-family)
-- [Deita Dataset](#deita-dataset)
-- [Deita Models](#deita-models)
+  - [Deita Dataset](#deita-dataset)
+  - [Deita Models](#deita-models)
 - [TODO](#todo)
 - [Citations](#citations)
 
