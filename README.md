@@ -35,7 +35,7 @@ Deita may provide an answer for you:
 | Model                                          | Align        | Data Size  | MT-Bench | AlpacaEval(%) |
 |------------------------------------------------|--------------|------------|----------|---------------|
 | Zephyr-7B-sft                                  | SFT          | 200K       | 5.32     | 75.12         |
-| Zephyr-7B-$\beta$                      | SFT + DPO    | 200K SFT + 60K DPO | 7.34     | 90.60         |
+| $\text{Zephyr-7B-}\beta$                      | SFT + DPO    | 200K SFT + 60K DPO | 7.34     | 90.60         |
 | OpenChat-3.5                                   | C-RLFT | >70K C-RLFT | 7.81     | 88.51         |
 | Starling-7B                                    | C-RLFT + APA | >70K C-RLFT + 183K APA | 8.09     | 91.99         |
 | Tulu-2-13B                                     | SFT          | 326K       | 6.70     | 78.90         |
