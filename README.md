@@ -1,7 +1,7 @@
 # Deita
 
 <p align="center">
-  <img src="./assets/logo-final.png" width="800">
+  <img src="./assets/logo-final.png" width="600">
 </p>
 
 <p align="center">
