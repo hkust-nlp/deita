@@ -8,6 +8,7 @@
   :hugs: <a href="https://huggingface.co/collections/hkust-nlp/deita-6569c198c174808d94cf5bd4">HF Repo</a>&nbsp;&nbsp;&nbsp;
   :page_with_curl: <a href="">Paper</a>
 </p>
+
 Welcome to Deita (**D**ata-**E**fficient **I**nstruction **T**uning for **A**lignment) Project! 
 
 This is the **preview version** of Deita. We will continue to update, please stay tuned!
