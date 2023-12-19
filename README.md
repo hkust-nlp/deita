@@ -43,9 +43,9 @@ Deita may provide an answer for you:
 | LLaMA2-13B-Chat                                | SFT + PPO    | --         | 6.65     | 81.09         |
 | WizardLM-13B-v1.2                              | SFT          | >70K       | 7.09     | 89.17         |
 | Vicuna-13B-v1.5                                | SFT          | >125K      | 6.57    | 78.80         |
-| DEITA-7B-v1.0 (6K)          | SFT          | 6K       |   7.17   |    80.95      |
-| DEITA-7B-v1.0-sft            | SFT          | 10K        | 7.30     | 80.59         |
-| DEITA-7B-v1.0 | SFT + DPO    | 6K SFT + 10K DPO | 7.46     | 89.32         |
+| DEITA-7B-v1.0 (6K)          | SFT          | 6K       |   7.22   |    80.78      |
+| DEITA-7B-v1.0-sft            | SFT          | 10K        | 7.32     | 81.67         |
+| DEITA-7B-v1.0 | SFT + DPO    | 6K SFT + 10K DPO | 7.55     | 90.06         |
 
 DEITA models are based on Mistral-7B-v0.1. :fire: To our surprise, the Mistral-based DEITA-7B-v1.0 model, trained with SFT on 6K data selected by our toolkit, achieved amazing performance by merely undergoing DPO with 10K preference data **randomly sampled** from Ultrafeedback. Specifically, it demonstrated a remarkable MT-Bench score of **7.46** and an AlpacaEval win rate of **89.32**
 
@@ -72,9 +72,9 @@ Please refer to [this table](#chart\_with\_upwards\_trend-full-evaluations) for 
 | OpenChat-3.5                                   | C-RLFT | >70K C-RLFT | 7.81     | 88.51         | --           |
 | Starling-7B                                    | C-RLFT + APA | >70K C-RLFT + 183K APA | 8.09     | 91.99         | --            |
 | Random                                         | SFT       | 10K SFT       | 5.89     | 56.90         | 61.72          |
-| DEITA-7B-v1.0-sft (6K)                           | SFT       | 6K SFT       | 7.17     | 80.95         | --          |
-| DEITA-7B-v1.0-sft                           | SFT       | 10K SFT       | 7.30     | 80.59         | 64.22          |
-| DEITA-7B-v1.0             | SFT + DPO | 6K SFT + 10K DPO   | 7.46     | 89.32         | xx.xx          |  
+| DEITA-7B-v1.0-sft (6K)                           | SFT       | 6K SFT       | 7.22     | 80.78         | --          |
+| DEITA-7B-v1.0-sft                           | SFT       | 10K SFT       | 7.32     | 81.67         | 64.00          |
+| DEITA-7B-v1.0             | SFT + DPO | 6K SFT + 10K DPO   | 7.55     | 90.06         | 69.86          |  
 | **Open-sourced Models based on LLaMA-2-13B**   |           |            |          |               |                |
 | Tulu-2-13B                                     | SFT       | 326K SFT      | 6.70     | 78.90         | --             |
 | Tulu-2-13B+DPO                                 | SFT + DPO | 326K SFT + 60K DPO | 7.00     | 89.50         | --             |
@@ -103,9 +103,9 @@ Please refer to [this table](#chart\_with\_upwards\_trend-full-evaluations) for 
 |  deita-complexity-scorer                      | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-complexity-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
 |  deita-quality-scorer               | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-quality-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
 | **Deita Models**                                   |           |             |
-| DEITA-7B-v1.0-sft (6K)                | [:hugs: HF Repo]()           | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)             | 
-| DEITA-7B-v1.0-sft                | [:hugs: HF Repo]()           | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)             | 
-| DEITA-7B-v1.0                | [:hugs: HF Repo]()           | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)             | 
+| DEITA-7B-v1.0-sft (6K)                | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-7b-v1.0-sft-6k)           | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)             | 
+| DEITA-7B-v1.0-sft                | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-7b-v1.0-sft)           | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)             | 
+| DEITA-7B-v1.0                | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-7B-v1.0)           | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)             | 
 | DEITA-LLaMA2-13B-v1.0-sft         | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-llama2-13b-v1.0-sft)           |  [LLaMA 2 License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)           |
 | DEITA-LLaMA1-13B-v1.0-sft          | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-llama1-13b-v1.0-sft)          |  [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)           |
 
