@@ -72,7 +72,7 @@ Please refer to [this table](#chart\_with\_upwards\_trend-full-evaluations) for 
 | OpenChat-3.5                                   | C-RLFT | >70K C-RLFT | 7.81     | 88.51         | --           |
 | Starling-7B                                    | C-RLFT + APA | >70K C-RLFT + 183K APA | 8.09     | 91.99         | --            |
 | Random                                         | SFT       | 10K SFT       | 5.89     | 56.90         | 61.72          |
-| DEITA-7B-v1.0-sft (6K)                           | SFT       | 6K SFT       | 7.22     | 80.78         | --          |
+| DEITA-7B-v1.0-sft (6K)                           | SFT       | 6K SFT       | 7.22     | 80.78         | 64.94          |
 | DEITA-7B-v1.0-sft                           | SFT       | 10K SFT       | 7.32     | 81.67         | 64.00          |
 | DEITA-7B-v1.0             | SFT + DPO | 6K SFT + 10K DPO   | 7.55     | 90.06         | 69.86          |  
 | **Open-sourced Models based on LLaMA-2-13B**   |           |            |          |               |                |
