@@ -103,7 +103,6 @@ Please refer to [this table](#chart\_with\_upwards\_trend-full-evaluations) for 
 | **Scorers**                                   |           |             |
 |  deita-complexity-scorer                      | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-complexity-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
 |  deita-quality-scorer               | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-quality-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
-|  deita-combine-scorer               | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-combine-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
 | **Deita Models**                                   |           |             |
 | DEITA-7B-v1.0-sft                | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-7b-v1.0-sft)           | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)             |
 | DEITA-7B-v1.0                | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-7B-v1.0)           | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)             |
