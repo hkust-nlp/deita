@@ -109,10 +109,119 @@ Please refer to [this table](#chart\_with\_upwards\_trend-full-evaluations) for 
 | DEITA-LLaMA2-13B-v1.0-sft         | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-llama2-13b-v1.0-sft)           |  [LLaMA 2 License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)           |
 | DEITA-LLaMA1-13B-v1.0-sft          | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-llama1-13b-v1.0-sft)          |  [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)           |
 
+## :running_man: How to start?
 
 
+### Installation
+```bash
+  git clone https://github.com/hkust-nlp/deita.git
+  cd deita
+  pip install -e .
+```
 
-### :muscle: What's more?
+### Data Sample Scoring
+
+If you wish to assess the **quality** of a response for a single sample, you can follow these steps:
+```python
+from deita.selection.scorer import Llama_Scorer
+
+model_name_or_path = "hkust-nlp/deita-quality-scorer"
+
+scorer = Llama_Scorer(model_name_or_path)
+
+# example input
+input_text = "word to describe UI with helpful tooltips" # Example Input
+output_text = "User-friendly or intuitive UI" # Example Output
+quality_score = scorer.infer_quality(input_text, output_text)
+
+print(quality_score)
+# 2.0230105920381902
+```
+
+Deita also supports VLLM for faster inference. If you want to use VLLM for inference,
+
+```bash
+pip install vllm
+```
+
+And set ```is_vllm = True``` when initilizing scorer
+
+```python
+scorer = Llama_Scorer(model_name_or_path, is_vllm = True)
+```
+
+To assess other dimensions of data samples, please refer to the ```examples/scoring```
+
+### SFT Training
+Please refer to ```examples/train/sft.sh```
+```bash
+deepspeed --include localhost:${DEVICES} --master_port 29501 src/deita/alignment/train.py \
+    --model_name_or_path ${MODELPATH} \
+    --data_path ${DATAPATH} \
+    --output_dir ${OUTPUTPATH}/${RUNNAME} \
+    --num_train_epochs 6 \
+    --per_device_train_batch_size ${BSZPERDEV} \
+    --per_device_eval_batch_size 1 \
+    --gradient_accumulation_steps ${GRADACC} \
+    --eval_steps 50 \
+    --save_strategy "no" \
+    --save_steps 100 \
+    --save_total_limit 10 \
+    --learning_rate 2e-5 \
+    --warmup_ratio 0.1 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 1 \
+    --do_eval False \
+    --evaluation_strategy "no" \
+    --model_max_length 2048 \
+    --lazy_preprocess True \
+    --conv_template "vicuna_v1.1" \
+    --mask_user True \
+    --report_to "wandb" \
+    --run_name ${RUNNAME} \
+    --bf16 True \
+    --deepspeed src/deita/ds_configs/deepspeed_config_zero2_no_offload.json
+```
+
+### DPO Training
+Please refer to ```examples/train/dpo.sh```
+```bash
+deepspeed --include localhost:${DEVICES} --master_port 29502 src/deita/alignment/dpo_train.py \
+    --model_name_or_path ${MODELPATH} \
+    --json_path ${JSONPATH} \
+    --data_split ${DATASPLIT} \
+    --output_dir ${OUTPUTPATH}/${RUNNAME} \
+    --num_train_epochs ${DPOEPOCH} \
+    --beta 0.1 \
+    --per_device_train_batch_size ${BSZPERDEV} \
+    --per_device_eval_batch_size 1 \
+    --gradient_accumulation_steps ${GRADACC} \
+    --save_global_steps False \
+    --eval_steps 50 \
+    --save_strategy "no" \
+    --save_steps 500 \
+    --save_total_limit 1 \
+    --learning_rate 5e-7 \
+    --warmup_ratio 0.1 \
+    --lr_scheduler_type "linear" \
+    --logging_steps 1 \
+    --do_eval False \
+    --evaluation_strategy "no" \
+    --model_max_length 2048 \
+    --conv_template "vicuna_v1.1" \
+    --report_to "wandb" \
+    --run_name ${RUNNAME} \
+    --bf16 True \
+    --gradient_checkpointing True \
+    --deepspeed src/deita/ds_configs/stage3_no_offloading_accelerate.json
+```
+
+### Evaluation
+- For MT-Bench, please refer to [MT-Bench](https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge)
+- For AlpacaEval, please refer to [alpaca_eval](https://github.com/tatsu-lab/alpaca_eval)
+- For Open LLM Benchmark, please refer to [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness/tree/master) and follow settings on [HuggingFaceH4/open_llm_leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)
+
+## :muscle: What's more?
 
 This is the preview version of Deita project. We will continue to update including
 
@@ -134,3 +243,6 @@ If you find the content of this project helpful, please cite our paper as follow
       primaryClass={cs.CL}
 }
 ```
+
+## Acknowledgement
+For training code, we use the code template of [fastchat](https://github.com/lm-sys/FastChat).
