@@ -6,7 +6,7 @@
 
 <p align="center">
   :hugs: <a href="https://huggingface.co/collections/hkust-nlp/deita-6569c198c174808d94cf5bd4">HF Repo</a>&nbsp;&nbsp;&nbsp;
-  :page_with_curl: <a href="">Paper</a>
+  :page_with_curl: <a href="https://arxiv.org/abs/2312.15685">Paper</a>
 </p>
 
 Welcome to Deita (**D**ata-**E**fficient **I**nstruction **T**uning for **A**lignment) Project! 
@@ -129,7 +129,7 @@ If you find the content of this project helpful, please cite our paper as follow
       title={What Makes Good Data for Alignment? A Comprehensive Study of Automatic Data Selection in Instruction Tuning}, 
       author={Wei Liu and Weihao Zeng and Keqing He and Yong Jiang and Junxian He},
       year={2023},
-      eprint={},
+      eprint={2312.15685},
       archivePrefix={arXiv},
       primaryClass={cs.CL}
 }
