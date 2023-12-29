@@ -20,7 +20,7 @@ Deita is an open-sourced project designed to facilitate **Automatic Data Selecti
 It includes:
 - **Open-sourced Toolkits** for automatic data selection in instruction tuning
 - **Deita Datasets**: A series of extremely *lightweight*, high-quality alignment SFT data. We release 6k-sized and 10k-sized datasets in the first release
-- **Deita Models**: A series of powerful models on par with SOTA chat LLMs with an extremely efficient instruction tuning Process. Deita models can be obained by training with 10x less instruction tuning data compared with other SOTA LLMs
+- **Deita Models**: A series of powerful models on par with SOTA chat LLMs with an extremely efficient instruction tuning Process. Deita models can be obtained by training with 10x less instruction tuning data compared with other SOTA LLMs
 
 ## News
 
