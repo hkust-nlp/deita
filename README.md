@@ -4,10 +4,17 @@
   <img src="./assets/logo-final.png" width="600">
 </p>
 
+
+
+
+
 <p align="center">
-  :hugs: <a href="https://huggingface.co/collections/hkust-nlp/deita-6569c198c174808d94cf5bd4">HF Repo</a>&nbsp;&nbsp;&nbsp;
-  :page_with_curl: <a href="https://arxiv.org/abs/2312.15685">Paper</a>
+  🤗 <a href="https://huggingface.co/collections/hkust-nlp/deita-6569c198c174808d94cf5bd4">HF Repo</a>&nbsp;&nbsp;&nbsp;
+  📄 <a href="https://arxiv.org/abs/2312.15685">Paper</a>&nbsp;&nbsp;&nbsp;
+  📚 <a href="https://huggingface.co/datasets/hkust-nlp/deita-6k-v0">6K Data</a>&nbsp;&nbsp;&nbsp;
+  📚 <a href="https://huggingface.co/datasets/hkust-nlp/deita-10k-v0">10K Data</a>
 </p>
+
 
 Welcome to Deita (**D**ata-**E**fficient **I**nstruction **T**uning for **A**lignment) Project! 
 
