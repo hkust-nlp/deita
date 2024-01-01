@@ -105,8 +105,8 @@ Please refer to [this table](#chart\_with\_upwards\_trend-full-evaluations) for 
 | Resource                                       | Link     | License  |
 |------------------------------------------------|-----------|------------|
 | **Deita Datasets**                                   |           |            |
-| deita-6k-v0                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-6k-v0)          | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) |
-| deita-10k-v0                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-10k-v0)          | [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+| deita-6k-v0                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-6k-v0)          | [MIT License](https://opensource.org/license/mit/) |
+| deita-10k-v0                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-10k-v0)          | [MIT License](https://opensource.org/license/mit/) |
 | **Scorers**                                   |           |             |
 |  deita-complexity-scorer                      | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-complexity-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
 |  deita-quality-scorer               | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-quality-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
