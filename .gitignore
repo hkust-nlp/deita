@@ -4,3 +4,6 @@ __pycache__
 *dist*
 *egg-info
 .history
+data/
+outputs/
+logs/
