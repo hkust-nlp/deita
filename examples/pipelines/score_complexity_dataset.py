@@ -16,11 +16,11 @@ args = parser.parse_args()
 
 
 pipeline = Pipeline("score_pipeline", 
-                    data_path = args.data_path, 
-                    scorer = args.scorer, 
-                    scorer_name_or_path = args.scorer_name_or_path, 
-                    is_vllm = args.is_vllm, 
-                    score_type = args.score_type, 
-                    output_path = args.output_path)
+                    data_path = args.data_path,   # json file with sharegpt format
+                    scorer = args.scorer,   # [mistral, llama]
+                    scorer_name_or_path = args.scorer_name_or_path,  # scorer name or path e.g. hkust-nlp/deita-complexity-scorer
+                    is_vllm = args.is_vllm,  # launch with vllm [True, False]
+                    score_type = args.score_type, # [complexity, quality]
+                    output_path = args.output_path)  # output path (json format)
 
 pipeline.run()

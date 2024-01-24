@@ -1,10 +1,12 @@
 from .embed_pipeline import EmbedPipeline
 from .score_pipeline import ScorePipeline
+from .filter_pipeline import FilterPipeline
 from .base import PipelineRegistry
-from typing import Any, Dict, List, Optional, Union, Callable
+from typing import Callable
 
 PipelineRegistry.register("score_pipeline", ScorePipeline)
 PipelineRegistry.register("embed_pipeline", EmbedPipeline)
+PipelineRegistry.register("filter_pipeline", FilterPipeline)
 
 class Pipeline:
     

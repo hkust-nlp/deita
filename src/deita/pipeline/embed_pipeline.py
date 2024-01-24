@@ -44,7 +44,7 @@ class EmbedPipeline(BasePipeline):
             df.sort_values(by = "idx", inplace = True)
             df.reset_index(drop = True, inplace = True)
             
-            if self.is_compression:
+            if not self.is_compression:
                 df.to_pickle(self.output_path)
                 logger.info(f"Saved pickle to {self.output_path}")
             else:

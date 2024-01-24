@@ -19,11 +19,11 @@ parser.add_argument("--model_name_or_path", type=str, default="mistralai/Mistral
 args = parser.parse_args()
 
 embed_pipeline = Pipeline("embed_pipeline", 
-                          data_path = args.data_path,
-                          output_path = args.output_path,
-                          model_name_or_path = args.model_name_or_path,
+                          data_path = args.data_path,   # json file with sharegpt format
+                          output_path = args.output_path,  # output path (pickle format)
+                          model_name_or_path = args.model_name_or_path,  # model name or path e.g. mistralai/Mistral-7B-v0.1
                           max_length = args.max_length,
-                          use_flash_attention = args.use_flash_attention,
+                          use_flash_attention = args.use_flash_attention,  
                           batch_size_per_device = args.batch_size_per_device,
                           conv_template = args.conv_template,
                           only_answer = args.only_answer,
