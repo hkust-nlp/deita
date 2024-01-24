@@ -15,7 +15,7 @@
 
 Welcome to Deita (**D**ata-**E**fficient **I**nstruction **T**uning for **A**lignment) Project! 
 
-This is the **preview version** of Deita. We will continue to update, please stay tuned!
+We will continue to update, please stay tuned!
 
 
 ## What is Deita?
