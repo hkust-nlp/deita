@@ -5,9 +5,6 @@
 </p>
 
 
-
-
-
 <p align="center">
   🤗 <a href="https://huggingface.co/collections/hkust-nlp/deita-6569c198c174808d94cf5bd4">HF Repo</a>&nbsp;&nbsp;&nbsp;
   📄 <a href="https://arxiv.org/abs/2312.15685">Paper</a>&nbsp;&nbsp;&nbsp;
@@ -30,7 +27,9 @@ It includes:
 - **Deita Models**: A series of powerful models on par with SOTA chat LLMs with an extremely efficient instruction tuning Process. Deita models can be obained by training with 10x less instruction tuning data compared with other SOTA LLMs
 
 ## News
-
+- 📄 [01/2024] Deita paper [What Makes Good Data for Alignment? A Comprehensive Study of Automatic Data Selection in Instruction Tuning](https://arxiv.org/abs/2312.15685) has been accepted by ICLR2024!
+- :fire: [01/2024] [Deita pipelines](#deita-pipelines) have been released! With one line code and configurations, a high-quality data subset for alignment can be selected.
+- 📚 [01/2024] Our scorer datasets [deita-complexity-scorer-data](https://huggingface.co/datasets/hkust-nlp/deita-complexity-scorer-data) and [deita-quality-scorer-data](https://huggingface.co/datasets/hkust-nlp/deita-quality-scorer-data) have been released.
 - :fire: [12/2023] We release the first collection of the Deita resources [here](https://huggingface.co/collections/hkust-nlp/deita-6569c198c174808d94cf5bd4), which include a series of extremely lightweight, effective sft datasets, the data complexity/quality scorer models, as well as the resulted deita chat models. 
 
 ## Performance
@@ -107,6 +106,8 @@ Please refer to [this table](#chart\_with\_upwards\_trend-full-evaluations) for 
 | **Deita Datasets**                                   |           |            |
 | deita-6k-v0                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-6k-v0)          | [MIT License](https://opensource.org/license/mit/) |
 | deita-10k-v0                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-10k-v0)          | [MIT License](https://opensource.org/license/mit/) |
+| deita-complexity-scorer-data                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-complexity-scorer-data)          | [MIT License](https://opensource.org/license/mit/) |
+| deita-quality-scorer-data                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-quality-scorer-data)          | [MIT License](https://opensource.org/license/mit/) |
 | **Scorers**                                   |           |             |
 |  deita-complexity-scorer                      | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-complexity-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
 |  deita-quality-scorer               | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-quality-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
@@ -158,6 +159,85 @@ scorer = Llama_Scorer(model_name_or_path, is_vllm = True)
 ```
 
 To assess other dimensions of data samples, please refer to the ```examples/scoring```
+
+### Deita Pipelines
+
+You can use deita pipelines to perform a variety of operations on the dataset with only one line code and configurations.
+
+- **Dataset Scoring**
+
+```python
+from deita.pipeline import Pipeline
+
+pipeline = Pipeline("score_pipeline", 
+                    data_path = args.data_path,   # json file with sharegpt format
+                    scorer = args.scorer,   # [mistral, llama]
+                    scorer_name_or_path = args.scorer_name_or_path,  # scorer name or path e.g. hkust-nlp/deita-complexity-scorer
+                    is_vllm = args.is_vllm,  # launch with vllm [True, False]
+                    score_type = args.score_type, # [complexity, quality]
+                    output_path = args.output_path)  # output path (json format)
+
+pipeline.run()
+```
+
+- **Get Embeddings**
+
+We use Huggingface Accelerate to enhance efficiency:
+
+```python
+from deita.pipeline import Pipeline
+
+embed_pipeline = Pipeline("embed_pipeline", 
+                          data_path = args.data_path,   # json file with sharegpt format
+                          output_path = args.output_path,  # output path (pickle format)
+                          model_name_or_path = args.model_name_or_path,  # model name or path e.g. mistralai/Mistral-7B-v0.1
+                          max_length = args.max_length,
+                          use_flash_attention = args.use_flash_attention,  
+                          batch_size_per_device = args.batch_size_per_device,
+                          conv_template = args.conv_template,
+                          only_answer = args.only_answer,
+                          random_shuffle = args.random_shuffle,
+                          bfloat16 = True
+                          )
+
+embed_pipeline.run()
+```
+
+```bash
+CUDA_VISIBLE_DEVICES=$GPUIDX accelerate launch \
+    --mixed_precision bf16 \
+    --num_processes $NUMPROCESS \
+    --num_machines 1 \
+    examples/pipelines/embed_datasets.py \
+    --use_flash_attention true \
+    --data_path $DATAPATH \
+    --output_path $OUTPUTPATH \
+    --batch_size_per_device $BSZ
+```
+
+- **Score-first, Diversity-aware Selection**
+
+```python
+from deita.pipeline import Pipeline
+
+filter_pipeline = Pipeline("filter_pipeline", 
+                          data_path = args.data_path,  # json file with sharegpt format
+                          other_data_path = args.other_data_path,  # embedding file path (pickle format)
+                          threshold = args.threshold,  # filter threshold default: 0.9 
+                          data_size = args.data_size,  # size of selected data
+                          chunk_size = args.chunk_size,  # used for more efficient GPU computing  default: 100000
+                          sort_key = args.sort_key,  # default: "complexity_scores,quality_scores"
+                          output_path = args.output_path,  # json format output path
+                          distance_metric = args.distance_metric,  # default: cosine
+                          embedding_field = args.embedding_field,  # default: embedding
+                          is_compression = args.is_compression,  # default: False
+                          device = args.device  # GPU IDX, default: 0
+                          )
+
+filter_pipeline.run()
+```
+
+You can refer to ```examples/pipelines``` for more details. A doc will also be coming soon.
 
 ### SFT Training
 Please refer to ```examples/train/sft.sh```
@@ -241,13 +321,13 @@ This is the preview version of Deita project. We will continue to update includi
 If you find the content of this project helpful, please cite our paper as follows:
 
 ```
-@misc{liu2023what,
-      title={What Makes Good Data for Alignment? A Comprehensive Study of Automatic Data Selection in Instruction Tuning}, 
-      author={Wei Liu and Weihao Zeng and Keqing He and Yong Jiang and Junxian He},
-      year={2023},
-      eprint={2312.15685},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@inproceedings{
+liu2024what,
+title={What Makes Good Data for Alignment? A Comprehensive Study of Automatic Data Selection in Instruction Tuning},
+author={Wei Liu and Weihao Zeng and Keqing He and Yong Jiang and Junxian He},
+booktitle={The Twelfth International Conference on Learning Representations},
+year={2024},
+url={https://openreview.net/forum?id=BTKAeLqLMw}
 }
 ```
 
