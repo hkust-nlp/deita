@@ -45,7 +45,11 @@ class CLM_Embedder(Embedder):
         
         all_embeddings_list = []
         
-        for batch in tqdm(dataloader, total = len(tokenized_datasets) // self.minibatch_size, disable = not self.accelerator.is_local_main_process):
+        total_samples = len(tokenized_datasets)
+        total_batches = len(dataloader)
+        last_batch_size = total_samples % self.minibatch_size if total_samples % self.minibatch_size != 0 else self.minibatch_size
+        
+        for b_idx, batch in enumerate(tqdm(dataloader, total = len(tokenized_datasets) // self.minibatch_size, disable = not self.accelerator.is_local_main_process)):
             
             model.eval()
 
@@ -73,7 +77,11 @@ class CLM_Embedder(Embedder):
                 all_process_embeddings = [sample_dict]
             
             if self.accelerator.is_local_main_process:
-                for process_list in all_process_embeddings:
-                    all_embeddings_list.extend(process_list)
+                if b_idx == total_batches - 1:
+                    for process_list in all_process_embeddings[:last_batch_size]:
+                        all_embeddings_list.extend(process_list)
+                else:
+                    for process_list in all_process_embeddings:
+                        all_embeddings_list.extend(process_list)   
         
         return all_embeddings_list
