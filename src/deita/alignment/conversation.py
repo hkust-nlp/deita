@@ -16,6 +16,7 @@ class SeparatorStyle(IntEnum):
     NO_COLON_SINGLE = auto()
     NO_COLON_TWO = auto()
     ADD_NEW_LINE_SINGLE = auto()
+    SCORER = auto()
     LLAMA2 = auto()
     CHATGLM = auto()
     CHATML = auto()
@@ -83,6 +84,12 @@ class Conversation:
                     ret += role + "\n" + message + self.sep
                 else:
                     ret += role + "\n"
+            return ret
+        elif self.sep_style == SeparatorStyle.SCORER:
+            seps = [self.sep, self.sep2]
+            ret = ""
+            for i, (role, message) in enumerate(self.messages):
+                ret += message
             return ret
         elif self.sep_style == SeparatorStyle.NO_COLON_SINGLE:
             ret = self.system
@@ -859,6 +866,19 @@ register_conv_template(
         sep=" ",
         sep2=" </s><s>",
         stop_token_ids=[2],
+    )
+)
+
+register_conv_template(
+    Conversation(
+        name="scorer",
+        system="",
+        roles=("query", "score"),
+        messages=(),
+        offset=0,
+        sep_style=SeparatorStyle.SCORER,
+        sep="\n",
+        sep2="",
     )
 )
 

@@ -33,7 +33,7 @@ class CLM_Embedder(Embedder):
           tokenized_datasets = raw_dataset.map(
               preprocess_func,
               batched = True,
-              num_proc = 1,
+              num_proc = 32,
               remove_columns = ["conversations", "specific_length"],
               desc = "Tokenizing and reformatting instruction data"
           )  
