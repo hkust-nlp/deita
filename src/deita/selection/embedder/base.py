@@ -9,13 +9,12 @@ from transformers import (
 from deita.selection.embedder.utils import batchlize
 from transformers.trainer_pt_utils import LabelSmoother
 from accelerate import Accelerator
-
 IGNORE_TOKEN_ID = LabelSmoother.ignore_index
         
         
 class Embedder:
     
-    def __init__(self, model_name_or_path, **kwargs) -> None:
+    def __init__(self, **kwargs) -> None:
         
         self.compute_dtype = (
         torch.float16 
@@ -23,38 +22,55 @@ class Embedder:
         else (torch.bfloat16 if kwargs.get("bfloat16", False) else torch.float32)
         )
 
-        self.model_name_or_path = model_name_or_path
         self.max_length = kwargs.get('max_length')
         self.use_flash_attention = kwargs.get('use_flash_attention')
         self.batch_size_per_device = kwargs.get('batch_size_per_device')
         self.conv_template = kwargs.get('conv_template')
         self.only_answer = kwargs.get('only_answer')
         self.random_shuffle = kwargs.get('random_shuffle')
+        self.field = kwargs.get('field', "embedding")
         
+        self.num_proc = kwargs.get('num_proc', 32)
         self.local_rank = int(os.getenv("LOCAL_RANK", "0"))
         self.world_size = int(os.getenv("WORLD_SIZE", "1"))
-        torch.cuda.set_device(self.local_rank)  # NOTE: cpu-only machine will have error
-        
-        self.accelerator = Accelerator()
-        self.accelerator.wait_for_everyone()
         
         batch_size = self.batch_size_per_device  * self.world_size
         self.minibatch_size = batch_size
-                
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name_or_path, 
-                                                        model_max_length = self.max_length,
-                                                        padding_side = "right",
-                                                        use_fast = False)
-        
-        if "mistral" in self.model_name_or_path:
-            self.tokenizer.padding_side = "left"
-        
-        self.model = AutoModelForCausalLM.from_pretrained(self.model_name_or_path,
-                                               torch_dtype = self.compute_dtype,
-                                               use_flash_attention_2 = self.use_flash_attention)
+
+        model = kwargs.pop("model", None)
+        tokenizer = kwargs.pop("tokenizer", None)
+        self.model, self.tokenizer = self._load_model_tokenizer(model, tokenizer, **kwargs)
 
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.unk_token
+            
+    def _load_model_tokenizer(self, model, tokenizer, **kwargs):
+        
+        if model is not None:
+            # usually used for fsdp
+            assert tokenizer is not None, "Tokenizer must be provided if model is provided"
+            
+            return model, tokenizer
+        
+        else:
+            model_name_or_path = kwargs.get("model_name_or_path")
+            tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, 
+                                                model_max_length = self.max_length,
+                                                padding_side = "right",
+                                                use_fast = False)
+            
+            if "mistral" in model_name_or_path:
+                tokenizer.padding_side = "left"
+            
+            model = AutoModelForCausalLM.from_pretrained(model_name_or_path,
+                                                torch_dtype = self.compute_dtype,
+                                                use_flash_attention_2 = self.use_flash_attention).to(self.local_rank)
+            
+            accelerator = Accelerator()
+            accelerator.wait_for_everyone()
+            
+            return model, tokenizer
+        
 
     def rank0_print(self, *args):
         if self.local_rank == 0:

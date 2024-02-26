@@ -30,8 +30,9 @@ class EmbedPipeline(BasePipeline):
         
         all_embeddings_list = self.embedder.encode_samples(preprocessed_data)
         
-        logger.info(f"{len(all_embeddings_list)}")
-        logger.info("Finished embedding")
+        if self.embedder.local_rank == 0:
+            logger.info(f"{len(all_embeddings_list)}")
+            logger.info("Finished embedding")
         
         return all_embeddings_list
     
@@ -40,7 +41,7 @@ class EmbedPipeline(BasePipeline):
         # We use dataframe to save the results
         df = pandas.DataFrame(results)
         
-        if self.embedder.accelerator.is_main_process:
+        if self.embedder.local_rank == 0:
             df.sort_values(by = "idx", inplace = True)
             df.reset_index(drop = True, inplace = True)
             
