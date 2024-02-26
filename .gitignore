@@ -7,3 +7,4 @@ __pycache__
 data/
 outputs/
 logs/
+!data/deita_mix_dummy_101.json
