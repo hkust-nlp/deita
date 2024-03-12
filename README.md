@@ -27,6 +27,7 @@ It includes:
 - **Deita Models**: A series of powerful models on par with SOTA chat LLMs with an extremely efficient instruction tuning Process. Deita models can be obained by training with 10x less instruction tuning data compared with other SOTA LLMs
 
 ## News
+- :fire: [03/2024] Our datasets have been used by Huggingface to creat the [Zephyr Gemma Model](https://huggingface.co/collections/HuggingFaceH4/zephyr-7b-gemma-65e1fd82d26b426e3e63d956).
 - 📄 [01/2024] Deita paper [What Makes Good Data for Alignment? A Comprehensive Study of Automatic Data Selection in Instruction Tuning](https://arxiv.org/abs/2312.15685) has been accepted by ICLR2024!
 - :fire: [01/2024] [Deita pipelines](#deita-pipelines) have been released! With one line code and configurations, a high-quality data subset for alignment can be selected.
 - 📚 [01/2024] Our scorer datasets [deita-complexity-scorer-data](https://huggingface.co/datasets/hkust-nlp/deita-complexity-scorer-data) and [deita-quality-scorer-data](https://huggingface.co/datasets/hkust-nlp/deita-quality-scorer-data) have been released.
