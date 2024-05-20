@@ -109,6 +109,8 @@ Please refer to [this table](#chart\_with\_upwards\_trend-full-evaluations) for 
 | deita-10k-v0                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-10k-v0)          | [MIT License](https://opensource.org/license/mit/) |
 | deita-complexity-scorer-data                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-complexity-scorer-data)          | [MIT License](https://opensource.org/license/mit/) |
 | deita-quality-scorer-data                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-quality-scorer-data)          | [MIT License](https://opensource.org/license/mit/) |
+| deita-redundant-pool (100K)                                    | [:hugs: HF Repo](https://huggingface.co/datasets/hkust-nlp/deita-redundant-pool-data)          | [MIT License](https://opensource.org/license/mit/) |
+| deita-sota-pool (300K)                                    | [:hugs: HF Repo](https://huggingface.co/datasets/AndrewZeng/deita_sota_pool)          | [MIT License](https://opensource.org/license/mit/) |
 | **Scorers**                                   |           |             |
 |  deita-complexity-scorer                      | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-complexity-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
 |  deita-quality-scorer               | [:hugs: HF Repo](https://huggingface.co/hkust-nlp/deita-quality-scorer)          | [LLaMA License](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)|
